@@ -32,10 +32,12 @@ os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_API_KEY"] = getpass.getpass()
 
 # Document Loading and Merging
-paths = ["https://my.clevelandclinic.org/health/diseases/10946-cavities",
-               "data/dental-care-every-day-caregiver.pdf"]
+pdf_list = [os.path.join("data", pdf) for pdf in os.listdir("data")]
+url_list = ["https://my.clevelandclinic.org/health/diseases/10946-cavities"]
+data_path = pdf_list + url_list
+
 doc_l = []
-for path in paths[1:]:
+for path in data_path:
   if path.startswith("https"):
     doc_l.append(doc_load("webpage", path))
   elif path.endswith("pdf"):
@@ -43,6 +45,7 @@ for path in paths[1:]:
 
 
 merged_docs = doc_merging(doc_l)
+
 
 # Document Splitting and indexing
 doc_splits = text_split(merged_docs)
@@ -82,6 +85,6 @@ rag_chain = (
                |qa_prompt
                |llm)
 
-first_question = "What is the capital of India?"
+first_question = input("Ask me a question related to dental hygiene? :\n")
 ai_msg = rag_chain.invoke(first_question)
 print(ai_msg)
