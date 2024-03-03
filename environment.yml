@@ -71,8 +71,8 @@ dependencies:
   - pip:
     - pandas==2.2.0
     - langchain==0.1.7
-    - langchain_community==0.0.20
-    - langchain-openai==0.0.6
+    - langchain_community
+    - langchain-openai
     - SQLAlchemy==2.0.27
     - Flask-SQLAlchemy==3.1.1
     - fake-useragent==1.4.0
@@ -81,5 +81,9 @@ dependencies:
     - beautifulsoup4==4.12.3
     - matplotlib==3.8.3
     - streamlit==1.31.1
+    - langgraph
+    - watchdog
+    - langchain_mistralai
+    - langchainhub
    
 prefix: /Users/saishdesai/anaconda3/envs/dentalai

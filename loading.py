@@ -1,4 +1,4 @@
-from langchain.document_loaders import WebBaseLoader, PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader, WebBaseLoader
 from langchain_community.document_loaders.merge import MergedDataLoader
 
 
