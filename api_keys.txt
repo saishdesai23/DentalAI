@@ -1,0 +1,5 @@
+Langsmith - "ls__9271dbd4cabc40ff85c254ffca20fc8f"
+OpenAI  - "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"
+
+
+echo "export LANGCHAIN_API_KEY='ls__9271dbd4cabc40ff85c254ffca20fc8f'" >> ~/.zshrc

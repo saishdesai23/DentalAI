@@ -70,8 +70,8 @@ dependencies:
   - zstd=1.5.5=hd90d995_0
   - pip:
     - pandas==2.2.0
-    - langchain==0.1.7
-    - langchain_community
+    - langchain
+    - langchain-community
     - langchain-openai
     - SQLAlchemy==2.0.27
     - Flask-SQLAlchemy==3.1.1
@@ -85,5 +85,6 @@ dependencies:
     - watchdog
     - langchain_mistralai
     - langchainhub
+    - langsmith
    
 prefix: /Users/saishdesai/anaconda3/envs/dentalai
