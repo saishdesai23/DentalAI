@@ -1,0 +1,17 @@
+pandas
+langchain
+langchain-community
+langchain-openai
+SQLAlchemy
+Flask-SQLAlchemy
+fake-useragent
+pypdf2
+chromadb
+beautifulsoup4
+matplotlib
+streamlit
+langgraph
+watchdog
+langchain_mistralai
+langchainhub
+langsmith

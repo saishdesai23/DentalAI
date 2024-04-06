@@ -80,8 +80,8 @@ retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k
 
 
 # Selecting RAG Option
-rag_option_list = ['corrective_rag', 'rag_with_hist']
-rag_option = 'rag_with_hist'
+rag_option_list = ['corrective_rag', 'rag_with_hist', 'self_rag'] # not added self rag as of
+rag_option = 'corrective_rag'
 
 if rag_option == 'corrective_rag':
 
@@ -155,7 +155,6 @@ if input_text:
             pprint.pprint(value["keys"]["generation"])
             ans = value["keys"]["generation"]
         elif rag_option == 'rag_with_hist':
-            print("check")
             ans = rag_chain.invoke({"question": question, "chat_history": chat_history})
             print(ans)
             chat_history.extend([HumanMessage(content=question), ans])
