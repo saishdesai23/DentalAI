@@ -1,2 +1,5 @@
 # ingnore files in the folder vector store
 vectorstore/*
+
+# ... except the .gitkeep...
+!.gitkeep
