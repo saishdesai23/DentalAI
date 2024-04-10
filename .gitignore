@@ -1,2 +1,2 @@
 # ingnore files in the folder vector store
-vectorstore/
+vectorstore/*
