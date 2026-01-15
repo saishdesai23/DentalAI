@@ -2,17 +2,18 @@ import json
 import operator
 from typing import Annotated, Sequence, TypedDict
 import os
-from langchain import hub
+import langchainhub as hub
 from langchain_core.output_parsers import JsonOutputParser
-from langchain.prompts import PromptTemplate
-from langchain.schema import Document
-from langchain_community.chat_models import ChatOllama
+from langchain_core.prompts import PromptTemplate
+from langchain_core.documents import Document
+from langchain_ollama import ChatOllama
 from langchain_community.tools.tavily_search import TavilySearchResults
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain_mistralai.chat_models import ChatMistralAI
-from langchain_openai import OpenAIEmbeddings   
+from langchain_openai import OpenAIEmbeddings
+from langchain_openai import ChatOpenAI
 
 # Retriever
 persist_directory = "vectorstore/"
@@ -41,7 +42,7 @@ def retrieve(state):
     state_dict = state["keys"]
     question = state_dict["question"]
     local = state_dict["local"]
-    documents = retriever.get_relevant_documents(question)
+    documents = retriever.invoke(question)
     return {"keys": {"documents": documents, "local": local, "question": question}}
 
 
@@ -62,15 +63,21 @@ def generate(state):
     local = state_dict["local"]
 
     # Prompt
-    prompt = hub.pull("rlm/rag-prompt")
+    prompt = PromptTemplate.from_template(
+        "You are an assistant for question-answering tasks. "
+        "Use the following pieces of retrieved context to answer the question. "
+        "If you don't know the answer, just say that you don't know. "
+        "Use three sentences maximum and keep the answer concise.\n\n"
+        "Question: {question}\n\n"
+        "Context: {context}\n\n"
+        "Answer:"
+    )
 
     # LLM
     if local == "Yes":
         llm = ChatOllama(model=local_llm, temperature=0)
     else:
-        llm = ChatMistralAI(
-            model="mistral-medium", temperature=0, mistral_api_key=mistral_api_key
-        )
+        llm = ChatOpenAI(model_name= 'gpt-4o', temperature=0)
 
     # Post-processing
     def format_docs(docs):

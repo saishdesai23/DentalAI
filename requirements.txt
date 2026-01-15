@@ -15,3 +15,5 @@ watchdog
 langchain_mistralai
 langchainhub
 langsmith
+langchain-chroma
+langchain_ollama

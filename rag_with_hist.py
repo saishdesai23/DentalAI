@@ -2,7 +2,7 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings 
 from langchain_core.messages import AIMessage, HumanMessage
 
@@ -15,7 +15,7 @@ retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k
 def rag_hist():
 
     # Step1: Initialize a language model with ChatOpenAI
-    llm = ChatOpenAI(model_name= 'gpt-3.5-turbo', temperature=0)
+    llm = ChatOpenAI(model_name= 'gpt-4o', temperature=0)
 
     # Step 2: Create a prompt to support chat history
     contextualize_q_system_prompt = """Given a chat history and the latest user question \
